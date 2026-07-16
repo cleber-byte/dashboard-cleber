@@ -1,142 +1,243 @@
-"use client";
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCI Comercial - Dashboard de Vendas</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-amber-500 selection:text-slate-950">
 
-export default function Dashboard() {
-  // Seus dados reais de atendimento integrados
-  const [leads] = useState([
-    { id: 1, nome: "Guilherme Zaggia", produto: "PCI", status: "Ganho", origem: "Campanha JOKER", dias: 0 },
-    { id: 2, nome: "Rodrigo", produto: "Líder", status: "Ganho", origem: "Planilha Pedro", dias: 0 },
-    { id: 3, nome: "Bethania", produto: "Líder", status: "Ganho", origem: "Planilha Pedro", dias: 0 },
-    { id: 4, nome: "Shimilly", produto: "PCI", status: "Ganho", origem: "Mapeamento Interno", dias: 0 },
-    { id: 5, nome: "Ricardo", produto: "PCI", status: "Atendimento", origem: "Site (Londrina)", dias: 0 },
-    { id: 6, nome: "Luiz", produto: "Líder", status: "Atendimento", origem: "Base Ativa", dias: 1 },
-    { id: 7, nome: "Luciana", produto: "PCI", status: "Atendimento", origem: "Aula Especial", dias: 1 },
-    { id: 8, nome: "Gilmara", produto: "Líder", status: "Atendimento", origem: "Formulário Interesse", dias: 1 },
-    { id: 9, nome: "Milena", produto: "Líder", status: "Atendimento", origem: "Formulário Interesse", dias: 2 },
-    { id: 10, nome: "Jan Guimaraes", produto: "PCI", status: "Contato Inicial", origem: "Mapear", dias: 0 },
-    { id: 11, nome: "Fabiano", produto: "Líder", status: "Contato Inicial", origem: "Mapear", dias: 0 },
-    { id: 12, nome: "Isaque Seixas", produto: "Líder", status: "Contato Inicial", origem: "Mapear", dias: 1 },
-    { id: 13, nome: "Laira Stephane", produto: "Líder", status: "Contato Inicial", origem: "Landing Page", dias: 1 },
-  ]);
-
-  // Contadores Inteligentes
-  const totalLeads = leads.length;
-  const totalGanhos = leads.filter(l => l.status === "Ganho").length;
-  const totalAtendimento = leads.filter(l => l.status === "Atendimento").length;
-  const totalInicial = leads.filter(l => l.status === "Contato Inicial").length;
-
-  return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 font-sans">
-      {/* Cabeçalho de Elite */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-gray-800 pb-6">
+  <!-- TOP BAR / HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="bg-amber-600 text-white p-2 rounded-lg font-bold text-xl tracking-wider">🦅</div>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
-            SISTEMA DE CADÊNCIA OPERACIONAL
-          </h1>
-          <p className="text-gray-400 mt-1 text-sm">Performance de Atendimento — Consultor Cleber Michel</p>
-        </div>
-        <div className="bg-gray-900 border border-gray-800 px-4 py-2 rounded-lg mt-4 md:mt-0">
-          <span className="text-xs text-gray-500 block uppercase">Atualizado em</span>
-          <span className="text-sm font-semibold text-orange-400">18 de Junho, 2026</span>
+          <h1 class="text-lg font-bold tracking-tight text-white">PCI Comercial</h1>
+          <p class="text-xs text-slate-400">Painel Operacional — Quinta-Feira, 16 de Julho de 2026</p>
         </div>
       </div>
-
-      {/* QUADRO DE MEDIDORES (KPIs) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gray-900 border border-gray-800 p-5 rounded-xl">
-          <p className="text-xs text-gray-400 uppercase font-medium">Total em Carteira</p>
-          <p className="text-3xl font-bold mt-2 text-white">{totalLeads} <span className="text-sm font-normal text-gray-500">leads</span></p>
-        </div>
-        <div className="bg-gray-900 border border-gray-800 p-5 rounded-xl border-l-4 border-l-emerald-500">
-          <p className="text-xs text-emerald-400 uppercase font-medium">Ganhos Pagos</p>
-          <p className="text-3xl font-bold mt-2 text-emerald-400">{totalGanhos} <span className="text-sm font-normal text-gray-500">fechados</span></p>
-        </div>
-        <div className="bg-gray-900 border border-gray-800 p-5 rounded-xl border-l-4 border-l-amber-500">
-          <p className="text-xs text-amber-400 uppercase font-medium">Em Atendimento Ativo</p>
-          <p className="text-3xl font-bold mt-2 text-amber-400">{totalAtendimento} <span className="text-sm font-normal text-gray-500">no funil</span></p>
-        </div>
-        <div className="bg-gray-900 border border-gray-800 p-5 rounded-xl border-l-4 border-l-blue-500">
-          <p className="text-xs text-blue-400 uppercase font-medium">Contato Inicial (Triagem)</p>
-          <p className="text-3xl font-bold mt-2 text-blue-400">{totalInicial} <span className="text-sm font-normal text-gray-500">novos</span></p>
-        </div>
-      </div>
-
-      {/* SEÇÃO DE ANÁLISE DE ORIGEM (Pedido do Diretor) */}
-      <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl mb-8">
-        <h3 className="text-lg font-bold mb-4 text-gray-200">Distribuição Operacional por Origem do Lead</h3>
-        <div className="space-y-4">
-          <div>
-            <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-300 font-medium">Planilha Pedro / Comercial</span>
-              <span className="text-orange-400 font-bold">3 Atendimentos</span>
-            </div>
-            <div className="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-              <div className="bg-gradient-to-r from-orange-500 to-amber-400 h-full w-[45%]"></div>
-            </div>
-          </div>
-          <div>
-            <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-300 font-medium">Campanha JOKER</span>
-              <span className="text-orange-400 font-bold">1 Atendimento (PCI Ganho)</span>
-            </div>
-            <div className="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-              <div className="bg-gradient-to-r from-orange-500 to-amber-400 h-full w-[20%]"></div>
-            </div>
-          </div>
-          <div>
-            <div className="flex justify-between text-xs mb-1">
-              <span className="text-gray-300 font-medium">Inbound Site / Landing Page / Redes</span>
-              <span className="text-orange-400 font-bold">5 Atendimentos</span>
-            </div>
-            <div className="w-full bg-gray-800 h-3 rounded-full overflow-hidden">
-              <div className="bg-gradient-to-r from-orange-500 to-amber-400 h-full w-[65%]"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ESTEIRA VIVA DE ATENDIMENTOS */}
-      <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
-        <div className="p-6 border-b border-gray-800">
-          <h3 className="text-lg font-bold text-gray-200">Painel de Controle de Leads e Cadência</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-950 text-gray-400 text-xs uppercase font-semibold border-b border-gray-800">
-                <th className="p-4">Nome do Lead</th>
-                <th className="p-4">Produto</th>
-                <th className="p-4">Origem do Lead</th>
-                <th className="p-4">Status</th>
-                <th className="p-4 text-center">Dias Sem Contato</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-800 text-sm">
-              {leads.map((lead) => (
-                <tr key={lead.id} className="hover:bg-gray-900/50 transition-colors">
-                  <td className="p-4 font-semibold text-white">{lead.nome}</td>
-                  <td className="p-4">
-                    <span className={`px-2 py-1 rounded text-xs font-bold ${lead.produto === 'PCI' ? 'bg-purple-950 text-purple-300 border border-purple-800' : 'bg-cyan-950 text-cyan-300 border border-cyan-800'}`}>
-                      {lead.produto}
-                    </span>
-                  </td>
-                  <td className="p-4 text-gray-300 font-medium">{lead.origem}</td>
-                  <td className="p-4">
-                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                      lead.status === 'Ganho' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
-                      lead.status === 'Atendimento' ? 'bg-amber-950 text-amber-400 border border-amber-800' :
-                      'bg-blue-950 text-blue-400 border border-blue-800'
-                    }`}>
-                      {lead.status}
-                    </span>
-                  </td>
-                  <td className="p-4 text-center font-bold text-gray-400">{lead.dias}d</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      <div class="flex items-center space-x-4">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span class="w-2 h-2 mr-2 bg-amber-400 rounded-full animate-ping"></span>
+          Foco do Dia: Apresentação Guilherme (11:00) & Meet Miriam (14:00) 🎯
+        </span>
       </div>
     </div>
-  );
-}
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- KPI CARDS CONTAINER -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-5">
+      <!-- Vendas Fechadas -->
+      <div class="bg-slate-900 border border-emerald-500 rounded-xl p-5 flex items-center justify-between border-l-4 border-l-emerald-500">
+        <div>
+          <p class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Vendas Ganhas (Julho)</p>
+          <h3 class="text-3xl font-extrabold mt-1 text-white">3 JC30</h3>
+        </div>
+        <div class="p-3 bg-emerald-950/50 rounded-lg text-emerald-400"><i class="fa-solid fa-circle-check text-2xl"></i></div>
+      </div>
+      <!-- Reuniões do Dia -->
+      <div class="bg-slate-900 border border-amber-500 rounded-xl p-5 flex items-center justify-between border-l-4 border-l-amber-500">
+        <div>
+          <p class="text-xs font-semibold text-amber-400 uppercase tracking-wider">Meets Hoje</p>
+          <h3 class="text-2xl font-bold mt-1 text-white">2 Confirmados</h3>
+        </div>
+        <div class="p-3 bg-amber-950/50 rounded-lg text-amber-500"><i class="fa-solid fa-calendar-day text-xl"></i></div>
+      </div>
+      <!-- Contatos Ativos -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Atendimentos no Funil</p>
+          <h3 class="text-2xl font-bold mt-1 text-indigo-400">15</h3>
+        </div>
+        <div class="p-3 bg-slate-800 rounded-lg text-indigo-400"><i class="fa-solid fa-users text-xl"></i></div>
+      </div>
+      <!-- Follow-up Pendente -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ligações Hoje</p>
+          <h3 class="text-2xl font-bold mt-1 text-blue-400">1 (Isabel)</h3>
+        </div>
+        <div class="p-3 bg-slate-800 rounded-lg text-blue-400"><i class="fa-solid fa-headset text-xl"></i></div>
+      </div>
+    </section>
+
+    <!-- MAIN TWO COLUMN LAYOUT -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- LEFT COLUMN: RADAR & PENDING TASKS -->
+      <div class="lg:col-span-1 space-y-6">
+        
+        <!-- RADAR DE ACESSOS E COMPROMISSOS -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
+          <h2 class="text-md font-bold text-amber-500 flex items-center gap-2">
+            <i class="fa-solid fa-satellite-dish animate-pulse"></i> Radar Ativo de Leads e Propostas
+          </h2>
+          <div class="space-y-3">
+            
+            <!-- WILLER BORGES (Destaque Quente) -->
+            <div class="p-3 bg-emerald-950/10 rounded-lg border border-emerald-500 text-[11px] border-l-4 border-l-emerald-500">
+              <div class="flex justify-between font-bold text-white">
+                <span>Willer Borges (Lopes Class)</span>
+                <span class="text-emerald-400 font-bold">Prog. 20/07 ⏳</span>
+              </div>
+              <p class="text-slate-300 mt-1">Acordo de 12x R$ 3.146,69 no boleto fechado via e-mail. Aguardando envio dos dados para emissão do contrato na segunda.</p>
+            </div>
+
+            <!-- ARTHUR FRANCESCO -->
+            <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] border-l-2 border-l-amber-500">
+              <div class="flex justify-between font-bold text-white">
+                <span>Arthur Francesco (Class Imóveis)</span>
+                <span class="text-amber-400 font-bold">Proposta Enviada ✉️</span>
+              </div>
+              <p class="text-slate-400 mt-1">E-mail com proposta do PCI enviado para: <i>imoveisclassgoiania@gmail.com</i>. Realizar follow-up de recebimento.</p>
+            </div>
+
+            <!-- CARLOS GALVÃO -->
+            <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] border-l-2 border-l-indigo-500">
+              <div class="flex justify-between font-bold text-white">
+                <span>Carlos Galvão</span>
+                <span class="text-indigo-400 font-bold">Novo no Radar 🛰️</span>
+              </div>
+              <p class="text-slate-400 mt-1">Lead inserido no radar de negociação. Preparar abordagem de diagnóstico operacional do PCI.</p>
+            </div>
+
+            <!-- VANDERSON -->
+            <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] border-l-2 border-l-slate-700">
+              <div class="flex justify-between font-bold text-white">
+                <span>Vanderson</span>
+                <span class="text-slate-400">Boleto Enviado</span>
+              </div>
+              <p class="text-slate-400 mt-1">Aguardando assinatura do contrato e pagamento do 1º boleto da condição especial.</p>
+            </div>
+
+            <!-- ALEX ROCHA -->
+            <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-[11px] border-l-2 border-l-slate-700">
+              <div class="flex justify-between font-bold text-white">
+                <span>Alex Rocha (Prime)</span>
+                <span class="text-slate-400">Aguardando Retorno</span>
+              </div>
+              <p class="text-slate-400 mt-1">Verificar se respondeu à mensagem de alinhamento de Onboarding enviado para Agosto.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACOMPANHAMENTO FUTURO -->
+        <div class="bg-indigo-950/20 border border-indigo-900/50 rounded-xl p-6 text-xs space-y-3">
+          <h3 class="font-bold text-indigo-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-days"></i> Radar Próximos Dias (Fim de Semana)
+          </h3>
+          <div class="space-y-3 text-slate-300">
+            <!-- TAREFA SANDRO -->
+            <div class="p-2.5 bg-slate-900/60 rounded border border-amber-500/30 text-[11px] border-l-2 border-l-amber-500">
+              <p class="font-bold text-white flex justify-between">
+                <span>📞 Ligar para Sandro</span>
+                <span class="text-amber-400">Amanhã (Sexta) 11:00</span>
+              </p>
+              <p class="text-slate-400 mt-1 text-[10px]">Indicação do <b>Marcos Toyama</b>. Ligar para apresentar e posicionar o PCI.</p>
+            </div>
+            <p><b>• Biank Imóveis:</b> Retomar contato amanhã (Sexta) para tentar agendar Meet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: MEETS & CLOSED SALES -->
+      <div class="lg:col-span-2 space-y-6">
+        
+        <!-- AGENDA DE REUNIÕES (HOJE) -->
+        <div class="bg-slate-900 border border-amber-500/30 rounded-xl p-6">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-md font-bold text-amber-500 flex items-center gap-2">
+                <i class="fa-solid fa-video"></i> Cronograma de Meets (Hoje - Quinta-Feira)
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">Sessões confirmadas na sala do Zoom</p>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 font-medium">
+                  <th class="py-2.5 px-2">Lead / Imobiliária</th>
+                  <th class="py-2.5 px-2">Horário</th>
+                  <th class="py-2.5 px-2">Estratégia do Papo</th>
+                  <th class="py-2.5 px-2 text-right">Ação</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/60 text-[11px]">
+                <!-- MEET GUILHERME -->
+                <tr class="bg-amber-950/20 hover:bg-amber-950/30">
+                  <td class="py-3 px-2 font-bold text-white flex items-center gap-1.5">
+                    <span class="text-amber-500">🔥</span> Guilherme <br><span class="text-[10px] text-slate-400 font-normal">Apresentação + Start</span>
+                  </td>
+                  <td class="py-3 px-2 text-amber-400 font-extrabold text-xs">11:00h</td>
+                  <td class="py-3 px-2 text-slate-200">Apresentar o escopo completo do PCI e formalizar o início do projeto.</td>
+                  <td class="py-3 px-2 text-right"><span class="bg-amber-500 text-slate-950 font-bold px-2 py-1 rounded text-[10px] animate-pulse">Entrar na Sala 🔗</span></td>
+                </tr>
+                <!-- MEET MIRIAM -->
+                <tr class="hover:bg-slate-800/20 text-slate-300">
+                  <td class="py-3 px-2 font-semibold">Miriam & Marido <br><span class="text-[10px] text-slate-400 font-normal">Lino Imóveis Vale</span></td>
+                  <td class="py-3 px-2 font-bold">14:00h</td>
+                  <td class="py-3 px-2 text-slate-400">Diagnóstico técnico do CRM e Integração de Leads. <br><span class="text-[9px] text-indigo-400 font-bold">Cleber + Diretor de Operações</span></td>
+                  <td class="py-3 px-2 text-right"><span class="bg-indigo-950/60 text-indigo-400 px-2 py-1 rounded text-[10px] border border-indigo-500/20">Link Enviado</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- GALERIA DE CONTRATOS ATIVOS -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-md font-bold text-slate-300 flex items-center gap-2">
+                <i class="fa-solid fa-award"></i> Contratos Ativos de Julho
+              </h2>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse">
+              <tbody class="divide-y divide-slate-800/60 text-[11px] text-slate-400">
+                <!-- RAFAEL ENNES -->
+                <tr class="hover:bg-slate-800/20">
+                  <td class="py-2.5 px-2 font-semibold text-white">Rafael Ennes (Karioca Imóveis)</td>
+                  <td class="py-2.5 px-2">JC30</td>
+                  <td class="py-2.5 px-2 text-right text-emerald-400 font-bold">Ativado</td>
+                </tr>
+                <!-- RODRIGO BUENO -->
+                <tr class="hover:bg-slate-800/20">
+                  <td class="py-2.5 px-2 font-semibold text-white">Rodrigo Bueno (ImoBueno)</td>
+                  <td class="py-2.5 px-2">JC30</td>
+                  <td class="py-2.5 px-2 text-right text-emerald-400 font-bold">Ativado</td>
+                </tr>
+                <!-- TATIANE -->
+                <tr class="hover:bg-slate-800/20">
+                  <td class="py-2.5 px-2 font-semibold text-white">Tatiane (Particular)</td>
+                  <td class="py-2.5 px-2">JC30</td>
+                  <td class="py-2.5 px-2 text-right text-emerald-400 font-bold">Ativado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+</body>
+</html>
